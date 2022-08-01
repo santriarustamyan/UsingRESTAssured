@@ -14,7 +14,7 @@ public class RestTest {
         Assert.assertEquals(request.rec200(),"200");
 
 //        System.out.println("Response code is: " + request.rec201());
-        Assert.assertEquals(request.rec201(),"201");
+        Assert.assertEquals(request. postRequest(Constants.TOKEN, Requests.body(new UserData())),"201");
 
 //        System.out.println("Response code is: " + request.rec204());
         Assert.assertEquals(request.rec204(),"204");
@@ -23,7 +23,7 @@ public class RestTest {
         Assert.assertEquals(request.rec401(),"401");
 
 //        System.out.println("Response code is: " + request.rec404());
-        Assert.assertEquals(request.rec404(),"404");
+        Assert.assertEquals(request.getRequest(Constants.URL, Constants.PATH, "BadId", "code"),"404");
 
 //        System.out.println("Response code is: " + request.rec422());
         Assert.assertEquals(request.rec422(),"422");
