@@ -12,59 +12,37 @@ public class UserData {
     public int getId() {
         return id;
     }
-    public String getName() {
-        return name;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public String getGender() {
-        return gender;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public String setGender() {
+        if (Math.random() > 0.5)
+            return "male";
+        else
+            return "female";
     }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public String setStatus() {
+        if (Math.random() > 0.5)
+            return "active";
+        else
+            return "inactive";
     }
 
     public UserData() {
         Faker faker = new Faker();
         this.name = faker.name().fullName();
         this.email = faker.internet().emailAddress();
-        this.gender = "male";
-        this.status = "active";
+        this.gender = setGender();
+        this.status = setStatus();
     }
 
     public UserData(String email) {
         Faker faker = new Faker();
         this.name = faker.name().fullName();
         this.email = email;
-        this.gender = "male";
-        this.status = "active";
+        this.gender = setGender();
+        this.status = setStatus();
     }
-
-
-
-
-
 }
-
-

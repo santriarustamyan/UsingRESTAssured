@@ -8,10 +8,8 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 
 public class Requests {
-    UserData userData = new UserData();
 
-
-    public static String body(UserData userData) {
+    public String body(UserData userData) {
         return new Gson().toJson(userData);
     }
 
@@ -40,22 +38,20 @@ public class Requests {
 
     }
 
-    public String postRequest(String token,String baseUrl, String basePath, String body) {
-
+    public String postRequest(String token, String baseUrl, String basePath, String body) {
         return
                 given()
                         .auth()
                         .oauth2(token)
                         .baseUri(baseUrl)
-                        .basePath(basePath )
+                        .basePath(basePath)
                         .header("Content-type", "application/json")
                         .and().body(body).when()
                         .post().jsonPath()
                         .get("code").toString();
-
     }
 
-    public String deleteRequest( String token,String baseUrl, String basePath, String id) {
+    public String deleteRequest(String token, String baseUrl, String basePath, String id) {
         return
                 given()
                         .auth()
