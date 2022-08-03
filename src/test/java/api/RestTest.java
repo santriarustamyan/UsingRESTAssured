@@ -3,29 +3,27 @@ package api;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static api.Requests.body;
+
 public class RestTest {
     Requests request = new Requests();
 
     @Test
 
         public void testAPI() {
+        UserData userData = new UserData();
 
-//        System.out.println("Response code is: " + request.rec200());
-        Assert.assertEquals(request.rec200(),"200");
+        Assert.assertEquals(request.getRequest(Constants.URL, Constants.PATH + request.getLastUserId(), "", "code"),"200");
 
-//        System.out.println("Response code is: " + request.rec201());
-        Assert.assertEquals(request. postRequest(Constants.TOKEN, Requests.body(new UserData())),"201");
+        Assert.assertEquals(request.postRequest(Constants.TOKEN,Constants.URL,Constants.PATH, body(new UserData())),"201");
 
-//        System.out.println("Response code is: " + request.rec204());
-        Assert.assertEquals(request.rec204(),"204");
+        Assert.assertEquals(request.deleteRequest(Constants.TOKEN,Constants.URL,Constants.PATH, request.getLastUserId()),"204");
 
-//        System.out.println("Response code is: " + request.rec401());
-        Assert.assertEquals(request.rec401(),"401");
+        Assert.assertEquals(request.postRequest(Constants.wrongToken,Constants.URL,Constants.PATH, body(userData)),"401");
 
-//        System.out.println("Response code is: " + request.rec404());
         Assert.assertEquals(request.getRequest(Constants.URL, Constants.PATH, "BadId", "code"),"404");
 
-//        System.out.println("Response code is: " + request.rec422());
-        Assert.assertEquals(request.rec422(),"422");
+        userData.setEmail("");
+        Assert.assertEquals(request.postRequest(Constants.TOKEN,Constants.URL,Constants.PATH, body(userData)),"422");
 
 }}

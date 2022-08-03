@@ -37,18 +37,17 @@ public class Requests {
 
         return Integer.toString(value.get(0).getId());
 
-//        getRequest(URL,PATH,"".;
-    }
-//    getRequest(URL,PATH,"", "code").toString();
 
-    public String postRequest(String token, String body) {
+    }
+
+    public String postRequest(String token,String baseUrl, String basePath, String body) {
 
         return
                 given()
                         .auth()
                         .oauth2(token)
-                        .baseUri(Constants.URL)
-                        .basePath(Constants.PATH)
+                        .baseUri(baseUrl)
+                        .basePath(basePath )
                         .header("Content-type", "application/json")
                         .and().body(body).when()
                         .post().jsonPath()
@@ -56,38 +55,14 @@ public class Requests {
 
     }
 
-    public String deleteRequest(String id) {
+    public String deleteRequest( String token,String baseUrl, String basePath, String id) {
         return
                 given()
                         .auth()
-                        .oauth2(Constants.TOKEN)
-                        .baseUri(Constants.URL)
-                        .basePath(Constants.PATH + id)
+                        .oauth2(token)
+                        .baseUri(baseUrl)
+                        .basePath(basePath + id)
                         .delete().jsonPath()
                         .get("code").toString();
     }
-
-    public String rec200() {
-
-        return getRequest(Constants.URL, Constants.PATH + getLastUserId(), "", "code");
-    }
-
-
-
-    public String rec204() {
-        return deleteRequest(getLastUserId());
-    }
-
-    public String rec401() {
-        return postRequest(Constants.wrongToken, body(userData));
-    }
-
-
-
-    public String rec422() {
-        userData.setEmail("");
-        return postRequest(Constants.TOKEN, body(userData));
-    }
-
-
 }
