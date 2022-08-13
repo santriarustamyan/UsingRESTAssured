@@ -13,7 +13,6 @@ public class Requests {
         return new Gson().toJson(userData);
     }
 
-
     public String getRequest(String baseUrl, String basePath, String id, String code) {
         return
                 given()

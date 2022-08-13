@@ -13,6 +13,22 @@ public class UserData {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -38,11 +54,5 @@ public class UserData {
         this.status = setStatus();
     }
 
-    public UserData(String email) {
-        Faker faker = new Faker();
-        this.name = faker.name().fullName();
-        this.email = email;
-        this.gender = setGender();
-        this.status = setStatus();
-    }
+
 }
